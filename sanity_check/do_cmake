@@ -1,0 +1,139 @@
+# ASPO configure / build / install --> kokkos-dev-2
+# Using `master`
+cmake \
+-DKokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE=OFF \
+-DKokkos_ENABLE_TESTS=OFF \
+-DKokkos_ENABLE_CUDA=ON \
+-DKokkos_ARCH_VOLTA70=ON \
+-DKokkos_ENABLE_SERIAL=ON \
+-DBUILD_SHARED_LIBS=ON \
+-DCMAKE_CXX_STANDARD=17 \
+-DCMAKE_INSTALL_PREFIX=$HOME/bio_kokkos/kokkos_install_bio \
+-DCMAKE_BUILD_TYPE=Release ..
+
+# env
+
+#-DCMAKE_INSTALL_PREFIX=$HOME/kokkos_install_aspo \
+#[ajpowel@kokkos-dev-2 kokkos]$ module list
+
+#Currently Loaded Modules:
+#  1) sems-python/3.8.6   2) sems-git/2.37.0   3) cmake/3.25.2   4) gcc/11.1   5) cuda/12.0
+
+
+#######################################################################################################
+
+# ExaminiMD configure / build / install
+#cmake \
+#-DKokkos_ENABLE_TESTS=ON \
+#-DKokkos_ENABLE_CUDA=ON \
+#-DKokkos_ENABLE_CUDA_LAMBDA=ON \
+#-DKokkos_ARCH_VOLTA70=ON \
+#-DKokkos_ENABLE_SERIAL=ON \
+#-DCMAKE_CXX_STANDARD=17 \
+#-DCMAKE_INSTALL_PREFIX=$HOME/kokkos_install_examiniMD \
+#-DCMAKE_BUILD_TYPE=Release ..\
+
+# 5168
+#cmake \
+#-DKokkos_ENABLE_TESTS=ON \
+#-DKokkos_ENABLE_CUDA=ON \
+#-DKokkos_ENABLE_CUDA_LAMBDA=ON \
+#-DKokkos_ARCH_VOLTA70=ON \
+#-DKokkos_ENABLE_SERIAL=ON \
+#-DCMAKE_CXX_STANDARD=14 \
+#-DCMAKE_BUILD_TYPE=Debug ..\
+
+# 4719 -- bhalf_t with Evan H.
+# OpenMP + serial build 
+#cmake \
+#-DKokkos_ENABLE_SERIAL=ON \
+#-DKokkos_ENABLE_OPENMP=ON \
+#-DKokkos_ENABLE_TESTS=ON \
+#-DKokkos_ARCH_VOLTA70=ON \
+#-DCMAKE_CXX_FLAGS= "-Wall -Wshadow -pedantic -Wsign-compare -Wtype-limits -Wignored-qualifiers -Wempty-body -Wclobbered -Wuninitialized -Wmaybe-uninitialized" \
+#-DKokkos_CXX_STANDARD=14 \
+#-DCMAKE_CXX_STANDARD=14 \
+#-DCMAKE_CXX_COMPILER=$HOME/KOKKOS.base/kokkos/bin/nvcc_wrapper \
+#-DCMAKE_INSTALL_PREFIX=$HOME/KOKKOS.base/kokkos/install_4719 \
+#-DCMAKE_BUILD_TYPE=Debug ..\
+
+# 4821
+# Cuda serial build, sans ccache
+#cmake \
+#-DKokkos_ENABLE_SERIAL=ON \
+#-DKokkos_ENABLE_CUDA=ON \
+#-DKokkos_ENABLE_CUDA_LAMBDA=ON \
+#-DKokkos_ENABLE_TESTS=ON \
+#-DKokkos_ARCH_VOLTA70=ON \
+#-DCMAKE_CXX_FLAGS= "-Wall -Wshadow -pedantic -Wsign-compare -Wtype-limits -Wignored-qualifiers -Wempty-body -Wclobbered -Wuninitialized -Wmaybe-uninitialized" \
+#-DKokkos_CXX_STANDARD=14 \
+#-DCMAKE_CXX_STANDARD=14 \
+#-DCMAKE_CXX_COMPILER=$HOME/kokkos_issue_4821/kokkos/bin/nvcc_wrapper \
+#-DCMAKE_BUILD_TYPE=Debug ..\
+
+# Cuda serial build, with ccache
+# kokkos-dev-2 does not have ccache
+#cmake \
+#-DKokkos_ENABLE_SERIAL=ON \
+#-DKokkos_ENABLE_CUDA=ON \
+#-DKokkos_ENABLE_CUDA_LAMBDA=ON \
+#-DKokkos_ENABLE_TESTS=ON \
+#-DKokkos_ARCH_VOLTA70=ON \
+#-DCMAKE_CXX_FLAGS= "-Wall -Wshadow -pedantic -Wsign-compare -Wtype-limits -Wignored-qualifiers -Wempty-body -Wclobbered -Wuninitialized -Wmaybe-uninitialized" \
+#-DKokkos_CXX_STANDARD=14 \
+#-DCMAKE_CXX_STANDARD=14 \
+#-DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+#-DCMAKE_CXX_COMPILER=g++ \
+#-DCMAKE_BUILD_TYPE=Debug ..\
+
+
+# Serial build
+#cmake \
+#-DKokkos_ENABLE_SERIAL=ON \
+#-DKokkos_ENABLE_TESTS=ON \
+#-DKokkos_CXX_STANDARD=17 \
+#-DCMAKE_CXX_FLAGS= "-Werror -Wunused -Wall -Wshadow -pedantic -Wsign-compare -Wtype-limits -Wignored-qualifiers -Wempty-body -Wclobbered -Wuninitialized -Wmaybe-uninitialized" \
+#-DCMAKE_CXX_STANDARD=17 \
+#-DCMAKE_INSTALL_PREFIX=$HOME/kokkos_serial_cuda_install_spmv \
+#-DCMAKE_BUILD_TYPE=Debug ..\
+
+#Leftovers
+#-DKokkos_ENABLE_TUNING=ON \
+#-DKokkos_ARCH_VOLTA70=ON \
+
+# Hot fix lines:
+#-DKokkos_ENABLE_TUNING=ON \
+#-DCMAKE_INSTALL_PREFIX=$HOME/kokkos_serial_cuda_install_tuning \
+
+# Deprecated lines ...? Jan. 2022
+#-Kokkos_ARCH_SKX=ON \
+# CUDA build:
+#
+#cmake \
+#-DENABLE_KOKKOS=ON \
+#-DKokkos_ENABLE_CUDA=OFF \
+#-DKokkos_ENABLE_CUDA_LAMBDA=OFF \
+#-DKokkos_ARCH_VOLTA70=OFF \
+#-DKokkos_ENABLE_OPENMP=ON \
+#-DCMAKE_CXX_STANDARD=14 \
+#-DCMAKE_INSTALL_PREFIX=$HOME/install_openmp \
+#-DCMAKE_BUILD_TYPE=Debug ..\
+
+# OPENMP build
+
+#cmake \
+#-DENABLE_KOKKOS=ON \
+#-DKokkos_ENABLE_OPENMP=ON \
+#-DKokkos_ARCH_VOLTA70=ON \
+#-DCMAKE_CXX_STANDARD=14 .. \
+#-DCMAKE_INSTALL_PREFIX=$HOME/install_openmp \
+#-DCMAKE_BUILD_TYPE=Release ..\
+
+# PThreads build
+
+#cmake \
+#-DKokkos_ENABLE_PTHREAD=ON \
+#-DCMAKE_CXX_STANDARD=14 .. \
+#-DCMAKE_INSTALL_PREFIX=$HOME/install_pthreads \
+#-DCMAKE_BUILD_TYPE=Release ..\
+
