@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
   Kokkos::deep_copy(d_numColsView, h_numColsView);
   Kokkos::deep_copy(d_matrixView, h_matrixView);
 
-  double useconds = timer.seconds()/1000000;
+  double useconds = timer.seconds()*1000000.0;
 
   printf(" Deep copying data from CPU to GPU: %f us\n", useconds);
 
