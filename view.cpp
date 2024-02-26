@@ -1,7 +1,4 @@
 #include <iostream>
-#include <fstream>
-#include <istream>
-#include <string>
 
 #include <Kokkos_Core.hpp>
 
@@ -12,7 +9,7 @@ int main(int argc, char** argv) {
     // Initialize Kokkos
     Kokkos::initialize(argc,argv);
 
-// Scope the computation 
+// Scope the Kokkos computation in `main`
 
 {
 
@@ -51,21 +48,21 @@ int main(int argc, char** argv) {
     for (int i = 0; i < numRows; i++) {
 			for(int j = 0; j < numCols; j++){
 					h_matrixView(i,j) = i * numCols + (j + numRows);
-          std::cout << h_matrixView(i,j) << " " << std::endl;
+          //std::cout << h_matrixView(i,j) << " " << std::endl;
           }
        }
 
    // Timer
    Kokkos::Timer timer;
  
-	// deep_copy host views to device
+	// deep_copy initialized host views to device
   Kokkos::deep_copy(d_numRowsView, h_numRowsView);
   Kokkos::deep_copy(d_numColsView, h_numColsView);
   Kokkos::deep_copy(d_matrixView, h_matrixView);
 
-  double time = timer.seconds();
+  double useconds = timer.seconds()/1000000;
 
-  printf(" Deep copying data from CPU to GPU: %d us\n", time); 
+  printf(" Deep copying data from CPU to GPU: %d us\n", useconds); 
    
 
     // Fence so you deallocation does not happen after finalize 
