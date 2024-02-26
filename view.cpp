@@ -18,11 +18,11 @@ int main(int argc, char** argv) {
 
      // See tutorial Exercise 03
      // Allocate 1D, 2D Views on device
-     
+
     // Create custom types
 		typedef Kokkos::View<int*> ViewVectorType;
 		typedef Kokkos::View<int**> ViewMatrixType;
-    
+
     // Device Views using custom types
     ViewVectorType d_numRowsView ("gpu_numRowsView", numRows);
     ViewVectorType d_numColsView ("gpu_numColsView", numCols);
@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
 
    // Timer
    Kokkos::Timer timer;
- 
+
 	// deep_copy initialized host views to device
   Kokkos::deep_copy(d_numRowsView, h_numRowsView);
   Kokkos::deep_copy(d_numColsView, h_numColsView);
@@ -62,10 +62,10 @@ int main(int argc, char** argv) {
 
   double useconds = timer.seconds()/1000000;
 
-  printf(" Deep copying data from CPU to GPU: %d us\n", useconds); 
-   
+  printf(" Deep copying data from CPU to GPU: %f us\n", useconds);
 
-    // Fence so you deallocation does not happen after finalize 
+
+    // Fence so you deallocation does not happen after finalize
     Kokkos::fence();
 }
 
